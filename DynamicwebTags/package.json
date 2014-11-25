@@ -3,7 +3,7 @@
     "title": "Dynamicweb CMS template tags finder",
     "description": "This extension will help you find Dynamicweb CMS tags. You start typing the name of the required tag and as you type you will get suggestions which you can click to insert into the editor. The tag will be wrapped as XSLT, HTML or Razor tag based on the type of file you have opened.",
     "homepage": "https://github.com/netsi1964/brackets-netsi1964Test",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "author": "Sten Hougaard <netsi1964@gmail.com> (http://www.netsi.dk/wordpress)",
     "license": "MIT",
     "engines": {

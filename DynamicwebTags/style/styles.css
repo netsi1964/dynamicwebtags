@@ -22,3 +22,7 @@
 #dynamicwebTags .row {
 	margin-left: 10px;
 }
+
+.inactive {
+	display: none;
+}
