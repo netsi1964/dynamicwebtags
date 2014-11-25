@@ -1,8 +1,32 @@
-<div id="netsi1964TestPanel" class="dynamicwebTags-panel bottom-panel vert-resizable top-resizer">
-	<div class="toolbar simple-toolbar-layout">
+<div id="dynamicwebTags" class="dynamicwebTags-panel bottom-panel vert-resizable top-resizer resizable-content">
+	<div class="vert-resizer"></div>
+	<div class="ternific-toolbar toolbar simple-toolbar-layout">
+		<div class="title"><a href="http://dynamicweb.com/?from=dynamicwebTagsBracketExtension">Dynamicweb CMS</a> Tags <code class="tags"></code>
+		</div>
+		<div class="toolbar-buttons">
+			<div class="dropdown">
+				<a href="#" data-action="sort-hints" data-toggle="dropdown" title="Hint sorting"><i class="fa fa-sort-alpha-desc"></i></a>
+				<ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu1">
+					<li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-sort="byPass">None</a>
+					</li>
+					<li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-sort="byMatch">Best Match</a>
+					</li>
+					<li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-sort="byFunction">Function</a>
+					</li>
+					<li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-sort="byObject">Object</a>
+					</li>
+					<li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-sort="byString">String</a>
+					</li>
+				</ul>
+			</div>
+
+			<a href="#" data-action="close"><i class="fa fa-times"></i></a>
+		</div>
+	</div>
+	<div class="resizable-content vert-resizable top-resizer">
 		<div class="row">
 			<div class="span4">
-				<h3><a href="http://dynamicweb.com/?from=dynamicwebTagsBracketExtension">Dynamicweb CMS</a> Tags <code class="tags"></code></h3>
+				<h3>Enter search value</h3>
 				<input id="autocomplete" type="text" placeholder="Type part of tagname">
 			</div>
 			<div class="span8">

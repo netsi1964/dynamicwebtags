@@ -14,7 +14,7 @@ define(function (require, exports, module) {
 	ExtensionUtils.loadStyleSheet(module, "style/styles.css");
 
 	var DynamicwebTags_EXECUTE = "DynamicwebTags.execute";
-	var panel, insertionPos, editor;
+	var panel, insertionPos, editor, language;
 	var panelHtml = require("text!templates/panel.html");
 	var dynamicwebTags = require("dynamicwebTags");
 	var iDynamicwebTags = dynamicwebTags.tags.length;
@@ -25,15 +25,45 @@ define(function (require, exports, module) {
 		console.log("[DynamicwebTags] " + s);
 	}
 
+	function wrapAsTag(sTag) {
+		var sWrappedTag = sTag;
+		switch (sTag) {
+		case "XML":
+			sWrappedTag = "<xsl:value-of select=\"" + sWrappedTag + "\" />";
+			break;
+		case "C#":
+			sWrappedTag = "@GetValue(\"" + sWrappedTag + "\") />";
+			break;
+		default:
+			sWrappedTag = "<!--@" + sWrappedTag + "-->";
+			break;
+		}
+	}
+
+
+	function insertTag(e) {
+		var tag = e.toElement.attributes.getNamedItem("data-tag").value;
+		if (tag !== "") {
+			var pos = editor.getCursorPos();
+			pos = (typeof pos === "undefined") ? {
+				line: 0,
+				ch: 0
+			} : pos;
+			editor.document.replaceRange(wrapAsTag(tag), editor.getCursorPos());
+		}
+
+	}
+
 	function handleDynamicwebTags() {
 		var $found = $(".found").off("click").on('click', insertTag);
 		if (typeof panel !== "undefined") {
-			log(dynamicwebTags);
 			if (panel.isVisible()) {
 				panel.hide();
 				CommandManager.get(DynamicwebTags_EXECUTE).setChecked(false);
 			} else {
 				editor = EditorManager.getFocusedEditor();
+				language = EditorManager.getFocusedEditor().document.language._name;
+				console.log(language);
 				if (editor) {
 					insertionPos = editor.getCursorPos();
 				}
@@ -47,7 +77,7 @@ define(function (require, exports, module) {
 						for (var i = 0; iFound < 30 && i < iDynamicwebTags; i++) {
 							var curr = dynamicwebTags.tags[i];
 							if (curr.value.indexOf(searchFor) !== -1) {
-								sFound += "<li><a href=\"#\" data-tag=\"" + curr.value + "\">" + curr.value + " (" + curr.context + ")</a></li>";
+								sFound += "<li><a href=\"#\" data-tag=\"" + curr.value + "\">" + curr.value + "</a> (" + curr.context + ")</li>";
 								iFound++;
 							}
 						}
@@ -63,17 +93,9 @@ define(function (require, exports, module) {
 	}
 
 
-
-	function insertTag(e) {
-		var tag = e.toElement.attributes.getNamedItem("data-tag").value;
-		if (tag !== "") {
-			editor.document.replaceRange("<!--@" + tag + "-->", insertionPos);
-		}
-
-	}
-
 	AppInit.appReady(function () {
 		log("Starting panel");
+
 		ExtensionUtils.loadStyleSheet(module, "DynamicwebTags.css");
 		CommandManager.register("Dynamicweb tags", DynamicwebTags_EXECUTE, handleDynamicwebTags);
 
@@ -82,7 +104,10 @@ define(function (require, exports, module) {
 
 		panel = WorkspaceManager.createBottomPanel(DynamicwebTags_EXECUTE, $(panelHtml), 300);
 		log("panel created");
-		log(dynamicwebTags);
+		$("[data-action='close']").on("click", function () {
+			panel.hide();
+			CommandManager.get(DynamicwebTags_EXECUTE).setChecked(false);
+		});
 
 	});
 
