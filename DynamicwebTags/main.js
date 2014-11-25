@@ -40,7 +40,7 @@ define(function (require, exports, module) {
 			sWrappedTag = "<xsl:value-of select=\"" + sWrappedTag + "\" />";
 			break;
 		case "Razor":
-			sWrappedTag = "@GetValue(\"" + sWrappedTag + "\"";
+			sWrappedTag = "@GetValue(\"" + sWrappedTag + "\")";
 			break;
 		default:
 			sWrappedTag = "<!--@" + sWrappedTag + "-->";
