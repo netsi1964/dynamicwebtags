@@ -12,11 +12,10 @@ define(function (require, exports, module) {
 
 	ExtensionUtils.loadStyleSheet(module, "style/styles.css");
 
-
 	var DynamicwebTags_EXECUTE = "DynamicwebTags.execute";
 	var panel;
 	var panelHtml = require("text!templates/panel.html");
-	//	var dynamicwebTags = require("javascript!dynamicwebTags.js");
+	var dynamicwebTags = require("dynamicwebTags");
 	//	var autocomplete = require("javascript!jquery.autocomplete.min.js");
 
 	function log(s) {
@@ -30,9 +29,9 @@ define(function (require, exports, module) {
 				CommandManager.get(DynamicwebTags_EXECUTE).setChecked(false);
 			} else {
 				panel.show();
-				$(".tags").text(tags.length + " tags");
+				$(".tags").text(dynamicwebTags.tags.length + " tags");
 				$('#autocomplete').autocomplete({
-					lookup: tags,
+					lookup: dynamicwebTags.tags,
 					maxHeight: 400,
 					formatResult: function (suggestion, currentValue) {
 						return suggestion.data.replace(new RegExp(currentValue, "ig"), "<strong>" + currentValue + "</strong>") + " (" + suggestion.context + ")";
