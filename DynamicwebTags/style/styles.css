@@ -22,7 +22,19 @@
 #dynamicwebTags .row {
 	margin-left: 10px;
 }
-
 .inactive {
 	display: none;
+}
+#dynamicwebTags li:nth-child(2n) {
+	background: rgba(100, 100, 100, .25);
+}
+#dynamicwebTags li small {
+	float: right;
+}
+
+#dynamicwebTags .span8 {
+	width: 75%;
+}
+#dynamicwebTags .span4 {
+	width: 20%;
 }

@@ -115,7 +115,7 @@ define(function (require, exports, module) {
 						for (var i = 0; iFound < iMaxShow && i < iDynamicwebTags; i++) {
 							var curr = searchTags[i];
 							if (curr.indexOf(searchFor) !== -1) {
-								sFound += "<li><a href=\"#\" data-tag=\"" + dynamicwebTags.tags[i].value + "\">" + dynamicwebTags.tags[i].value + "</a> (<small>" + dynamicwebTags.tags[i].context + "</small>)</li>";
+								sFound += "<li><a href=\"#\" data-tag=\"" + dynamicwebTags.tags[i].value + "\">" + dynamicwebTags.tags[i].value + "</a> <small>" + dynamicwebTags.tags[i].context + "</small></li>";
 								iFound++;
 							}
 						}
