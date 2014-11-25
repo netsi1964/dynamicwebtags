@@ -1,7 +1,7 @@
 dynamicwebtags
 ==============
 
-## A Adobe Brackets Extension for Dynamicweb template tags
+## An Adobe Brackets Extension for Dynamicweb template tags
 
 This extension will help you find [Dynamicweb CMS](http://dynamicweb.com/?from=github)  tags. You start typing the name of the required tag and as you type you will get suggestions which you can click to insert into the editor. The tag will be wrapped as XSLT, HTML or Razor tag based on the type of file you have opened.
 
