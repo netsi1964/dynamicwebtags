@@ -17,7 +17,7 @@ define(function (require, exports, module) {
 	var panel, insertionPos, editor, language;
 	var ignoreCase = true;
 	var iMaxShow = 50;
-	var $more;
+	var $count;
 	var panelHtml = require("text!templates/panel.html");
 	var dynamicwebTags = require("dynamicwebTags");
 	var iDynamicwebTags = dynamicwebTags.tags.length;
@@ -103,10 +103,8 @@ define(function (require, exports, module) {
 					insertionPos = editor.getCursorPos();
 				}
 				panel.show();
-				$more.hide();
 				$(".tags").text(iDynamicwebTags + " tags");
 				$('#autocomplete').on("keyup", function doSearch(e) {
-					$more.hide();
 					var searchFor = $.trim(this.value);
 					searchFor = (ignoreCase) ? searchFor.toLowerCase() : searchFor;
 					var sFound = "";
@@ -122,9 +120,7 @@ define(function (require, exports, module) {
 						if (iFound === 0) {
 							sFound = "<li>No tags found</li>";
 						}
-						if (iFound==iMaxShow) {
-							$more.attr("title","Showing first "+iMaxShow+" hits").show();
-						}
+						$count.text((iFound == iMaxShow) ? "Showing first " + iFound.toString() + " found" : "Found " + iFound.toString());
 						$found.html(sFound);
 					}
 				});
@@ -149,8 +145,8 @@ define(function (require, exports, module) {
 			panel.hide();
 			CommandManager.get(DynamicwebTags_EXECUTE).setChecked(false);
 		});
-		
-		$more = $(".more");
+
+		$count = $(".count");
 		$(".inactive").hide();
 
 	});
