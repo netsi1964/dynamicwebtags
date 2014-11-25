@@ -7,6 +7,10 @@ This extension will help you find [Dynamicweb CMS](http://dynamicweb.com/?from=g
 
 ![dynamicwebtags brackets extension in action](https://dl.dropboxusercontent.com/u/3260327/dynamicwebTags_bracket_01.png)
 
+### Activation
+You will need to find "dynamicwebtags" under `View` menu. Simply click the "dynamicwebtags" menu item to activate panel.
+![Open the dynamicwebtags panel under view menu](https://dl.dropboxusercontent.com/u/3260327/dynamicwebTags_bracket_02.png)
+
 ### My ideas
 
 *  Link to [templates.dynamicweb.dk](http://templates.dynamicweb.dk) 
