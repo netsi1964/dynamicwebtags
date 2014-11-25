@@ -48,6 +48,8 @@ define(function (require, exports, module) {
 
 
 	function insertTag(e) {
+		editor = EditorManager.getActiveEditor();
+		language = editor.getLanguageForSelection()._name;
 		var tag = e.toElement.attributes.getNamedItem("data-tag").value;
 		if (tag !== "") {
 			var pos = editor.getCursorPos();
@@ -61,8 +63,6 @@ define(function (require, exports, module) {
 	}
 
 	function insertText(sText) {
-		editor = EditorManager.getActiveEditor();
-		language = editor.getLanguageForSelection()._name;
 		console.log("Inserting " + sText + " as tag in " + language);
 		var cursor = editor.getCursorPos(),
 			start = {
