@@ -15,9 +15,14 @@ define(function (require, exports, module) {
 
 	var DynamicwebTags_EXECUTE = "DynamicwebTags.execute";
 	var panel, insertionPos, editor, language;
+	var ignoreCase = true;
 	var panelHtml = require("text!templates/panel.html");
 	var dynamicwebTags = require("dynamicwebTags");
 	var iDynamicwebTags = dynamicwebTags.tags.length;
+	var searchTags = [];
+	[].forEach.call(dynamicwebTags.tags, function prepearForSearch(tag) {
+		searchTags.push(tag.value.toLowerCase());
+	});
 
 	// var autocomplete = require("autocomplete");
 
@@ -27,7 +32,7 @@ define(function (require, exports, module) {
 
 	function wrapAsTag(sTag) {
 		var sWrappedTag = sTag;
-		switch (sTag) {
+		switch (language) {
 		case "XML":
 			sWrappedTag = "<xsl:value-of select=\"" + sWrappedTag + "\" />";
 			break;
@@ -38,6 +43,7 @@ define(function (require, exports, module) {
 			sWrappedTag = "<!--@" + sWrappedTag + "-->";
 			break;
 		}
+		return sWrappedTag;
 	}
 
 
@@ -49,9 +55,36 @@ define(function (require, exports, module) {
 				line: 0,
 				ch: 0
 			} : pos;
-			editor.document.replaceRange(wrapAsTag(tag), editor.getCursorPos());
+			insertText(wrapAsTag(tag));
 		}
 
+	}
+
+	function insertText(sText) {
+		editor = EditorManager.getActiveEditor();
+		language = editor.getLanguageForSelection()._name;
+		console.log("Inserting " + sText + " as tag in " + language);
+		var cursor = editor.getCursorPos(),
+			start = {
+				line: -1,
+				ch: -1
+			},
+			end = {
+				line: -1,
+				ch: -1
+			},
+			offset = 0,
+			charCount = 0;
+
+		end.line = start.line = cursor.line;
+		start.ch = cursor.ch - offset;
+		end.ch = start.ch + charCount;
+
+		if (start.ch !== end.ch) {
+			editor.document.replaceRange(sText, start, end);
+		} else {
+			editor.document.replaceRange(sText, start);
+		}
 	}
 
 	function handleDynamicwebTags() {
@@ -61,9 +94,6 @@ define(function (require, exports, module) {
 				panel.hide();
 				CommandManager.get(DynamicwebTags_EXECUTE).setChecked(false);
 			} else {
-				editor = EditorManager.getFocusedEditor();
-				language = EditorManager.getFocusedEditor().document.language._name;
-				console.log(language);
 				if (editor) {
 					insertionPos = editor.getCursorPos();
 				}
@@ -71,13 +101,14 @@ define(function (require, exports, module) {
 				$(".tags").text(iDynamicwebTags + " tags");
 				$('#autocomplete').on("keyup", function doSearch(e) {
 					var searchFor = $.trim(this.value);
+					searchFor = (ignoreCase) ? searchFor.toLowerCase() : searchFor;
 					var sFound = "";
 					var iFound = 0;
 					if (searchFor !== "") {
 						for (var i = 0; iFound < 30 && i < iDynamicwebTags; i++) {
-							var curr = dynamicwebTags.tags[i];
-							if (curr.value.indexOf(searchFor) !== -1) {
-								sFound += "<li><a href=\"#\" data-tag=\"" + curr.value + "\">" + curr.value + "</a> (" + curr.context + ")</li>";
+							var curr = searchTags[i];
+							if (curr.indexOf(searchFor) !== -1) {
+								sFound += "<li><a href=\"#\" data-tag=\"" + dynamicwebTags.tags[i].value + "\">" + dynamicwebTags.tags[i].value + "</a> (" + dynamicwebTags.tags[i].context + ")</li>";
 								iFound++;
 							}
 						}
