@@ -1,33 +1,5 @@
-.netsi1964Test-panel .autocomplete-suggestions {
-	background: rgba(240, 240, 240, 1);
-	color: black;
-	overflow: hidden;
-	border: solid 1px black;
-}
-.netsi1964Test-panel .autocomplete-suggestion {
-	white-space: nowrap;
-	overflow: hidden;
-	padding: 5px 3px;
-}
-.netsi1964Test-panel .autocomplete-selected {
-	background-color: rgba(255, 154, 0, .8);
-	color: #fff;
-}
-.netsi1964Test-panel .autocomplete-suggestions strong {
-	font-weight: 300;
-	background-color: rgba(44, 44, 24, .5);
-	color: white;
-	padding: 2px;
-}
-.netsi1964Test-panel .autocomplete-group {
-	padding: 2px 5px;
-}
-.netsi1964Test-panel .autocomplete-group strong {
-	display: block;
-	border-bottom: 1px dotted #000;
-}
-.netsi1964Test-panel input,
-.netsi1964Test-panel input:active {
+.dynamicwebTags-panel input,
+.dynamicwebTags-panel input:active {
 	outline-width: 0;
 	border-width: 1px;
 	border-style: solid;
@@ -36,6 +8,6 @@
 	width: 100%;
 	height: 30px;
 }
-.netsi1964Test-panel input:focus {
+.dynamicwebTags-panel input:focus {
 	background-color: rgba(0, 0, 0, .12);
 }
