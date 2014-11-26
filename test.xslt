@@ -7,6 +7,7 @@
 
 	<xsl:template match="/NavigationTree">
 		<!-- Try XSLT tags here	-->
+		<xsl:value-of select="eCom:Related.CustomersWhoSawThisAlsoSaw" />
 	</xsl:template>
 
 </xsl:stylesheet>
