@@ -37,7 +37,7 @@ define(function (require, exports, module) {
         var sWrappedTag = sTag;
         var sFilename = editor.getFile()._path;
         var extType = sFilename.substring(sFilename.lastIndexOf(".") + 1).toLowerCase();
-        var _language = ("cshtml,vbhtml,".indexOf(extType + ",") > -1 || language === "C#") ? "Razor" : language;
+        var _language = ("|cshtml|vbhtml|".indexOf("|"+extType + "|") > -1 || language === "C#") ? "Razor" : language;
         switch (_language) {
         case "XML":
             sWrappedTag = "<xsl:value-of select=\"" + sWrappedTag + "\" />";
