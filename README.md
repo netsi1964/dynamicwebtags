@@ -22,4 +22,3 @@ You are always welcome to report errors or ideas using Issues here in Github.
 
 Comments are also welcome: [@netsi1964](http://twitter.com/netsi1964)
 
-Thanks to [1st web](http://www.1stweb.dk/?from=dynamicwebtags) where I work.
